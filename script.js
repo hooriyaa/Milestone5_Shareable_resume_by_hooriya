@@ -1,12 +1,3 @@
-// interface ResumeFormElements extends HTMLFormControlsCollection {
-//   username: HTMLInputElement;
-//   name: HTMLInputElement;
-//   email: HTMLInputElement;
-//   contactNo: HTMLInputElement;
-//   education: HTMLTextAreaElement;
-//   skills: HTMLTextAreaElement;
-//   experience: HTMLTextAreaElement;
-// }
 document.addEventListener("DOMContentLoaded", function () {
     var resumeForm = document.getElementById("resumeForm");
     var shareableLinkInput = document.getElementById("shareableLink");
@@ -24,11 +15,11 @@ document.addEventListener("DOMContentLoaded", function () {
             var experience = formElements.experience.value;
             var skills = formElements.skills.value;
             var username = formElements.username.value;
-            //  the unique URL
+            // Generate the unique URL
             var baseURL = window.location.href.split('#')[0];
             var uniqueURL = "".concat(baseURL, "#").concat(username.replace(/\s+/g, '_'));
-            // the resume content
-            var resumeOutput = "\n              <h1>Resume</h1>\n              <p><b>Name:</b> <span id=\"nameOutput\">".concat(name, "</span></p>\n              <p><b>Email:</b> <span id=\"emailOutput\">").concat(email, "</span></p>\n              <p><b>Contact No:</b> <span id=\"contactNoOutput\">").concat(contactNo, "</span></p>\n              <h3>Education:</h3>\n              <p id=\"educationOutput\">").concat(education, "</p>\n              <h3>Experience:</h3>\n              <p id=\"experienceOutput\">").concat(experience, "</p>\n              <h3>Skills:</h3>\n              <p id=\"skillsOutput\">").concat(skills, "</p>\n              <button id=\"editButton\">Edit</button>\n              <button id=\"saveButton\" style=\"display:none;\">Save</button>\n          ");
+            // Create the resume content
+            var resumeOutput = "\n                <h1>Resume</h1>\n                <p><b>Name:</b> <span id=\"nameOutput\">".concat(name, "</span></p>\n                <p><b>Email:</b> <span id=\"emailOutput\">").concat(email, "</span></p>\n                <p><b>Contact No:</b> <span id=\"contactNoOutput\">").concat(contactNo, "</span></p>\n                <h3>Education:</h3>\n                <p id=\"educationOutput\">").concat(education, "</p>\n                <h3>Experience:</h3>\n                <p id=\"experienceOutput\">").concat(experience, "</p>\n                <h3>Skills:</h3>\n                <p id=\"skillsOutput\">").concat(skills, "</p>\n                <button id=\"editButton\">Edit</button>\n                <button id=\"saveButton\" style=\"display:none;\">Save</button>\n            ");
             // Display the resume output
             if (outputElement) {
                 outputElement.innerHTML = resumeOutput;
@@ -107,6 +98,6 @@ document.addEventListener("DOMContentLoaded", function () {
     if (hash && outputElement) {
         var decodedHash = decodeURIComponent(hash.replace(/_/g, ' '));
         // Display the saved resume (mockup for this example)
-        outputElement.innerHTML = "<h1>Resume for ".concat(decodedHash, "</h1>\n      <p>displayed resume here for ").concat(decodedHash, ".</p>");
+        outputElement.innerHTML = "<h1>Resume for ".concat(decodedHash, "</h1>\n        <p>displayed resume here for ").concat(decodedHash, ".</p>");
     }
 });
