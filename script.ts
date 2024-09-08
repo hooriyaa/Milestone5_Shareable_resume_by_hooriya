@@ -132,6 +132,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Display the saved resume (mockup for this example)
         outputElement.innerHTML = `<h1>Resume for ${decodedHash}</h1>
-        <p>Resume data would be fetched and displayed here for ${decodedHash}.</p>`;
+        <p>displayed resume here for ${decodedHash}.</p>`;
     }
 });
