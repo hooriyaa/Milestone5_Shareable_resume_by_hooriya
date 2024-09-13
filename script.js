@@ -31,10 +31,10 @@ document.addEventListener("DOMContentLoaded", () => {
   
       // Generate the unique URL
       const userName = formData.name.toLowerCase().replace(/\s+/g, "");
-      const uniqueUrl = `resume-viewer.html?username=${userName}`;
-      localStorage.setItem(userName, JSON.stringify(formData)); // Save data
+      const uniqueUrl = `review.html?username=${userName}`;
+      localStorage.setItem(userName, JSON.stringify(formData)); 
   
-      // Update the shareable link
+      // for the shareable link
       shareableLink.href = uniqueUrl;
       shareableLink.textContent = `Open Resume: ${uniqueUrl}`;
       shareableLink.style.display = "inline"; 
