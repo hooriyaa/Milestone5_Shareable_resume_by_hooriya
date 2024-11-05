@@ -3,14 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Review </title>
+    <title>Review</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <div class="container">
       <h1>Your Resume</h1>
       <div id="resume-content"></div>
-      <button id="download-btn">Download PDF</button>
+      <button id="download-btn" style="margin: 22px; margin-left: 13rem">
+        Download PDF
+      </button>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
@@ -25,15 +27,15 @@
           resumeContent.innerHTML = `
             <h3>${resumeData.name}</h3>
             <p>Email: ${resumeData.email}</p>
-            <h4>Education</h4>
+            <h4>Education:</h4>
             <p>${resumeData.degree} from ${resumeData.school} (Class of ${
             resumeData.gradYear
           })</p>
-            <h4>Work Experience</h4>
+            <h4>Work Experience:</h4>
             <p>${resumeData.jobTitle} at ${resumeData.company} (${
             resumeData.years
           } years)</p>
-            <h4>Skills</h4>
+            <h4>Skills:</h4>
             <ul>
               ${resumeData.skills.map((skill) => `<li>${skill}</li>`).join("")}
             </ul>
