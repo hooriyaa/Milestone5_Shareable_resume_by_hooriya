@@ -66,14 +66,15 @@
 
         <fieldset>
           <legend>Education</legend>
-          <label for="degree">Degree:</label>
-          <input type="text" id="degree" />
-
-          <label for="school">School/University:</label>
-          <input type="text" id="school" required />
-
-          <label for="gradYear">Graduation Year:</label>
-          <input type="number" id="gradYear" />
+          <div id="education-container">
+            <div class="education-entry">
+              <input type="text" class="degree" placeholder="Degree/Certificate" />
+              <input type="text" class="school" placeholder="School/University" />
+              <input type="number" class="grad-year" placeholder="Graduation Year" />
+              <button type="button" class="remove-education">Remove</button>
+            </div>
+          </div>
+          <button type="button" id="add-education">Add Education</button>
         </fieldset>
 
         <fieldset>
@@ -99,30 +100,21 @@
 
         <fieldset>
           <legend>Work Experience</legend>
-          <label for="jobTitle">Job Title:</label>
-          <input type="text" id="jobTitle" />
-
-          <label for="company">Company:</label>
-          <input type="text" id="company" />
-
-          <label for="years">Years of Experience:</label>
-          <input type="number" id="years" />
-
-          <label for="jobDescription">Job Description:</label>
-          <textarea
-            id="jobDescription"
-            rows="3"
-            style="
-              width: 95%;
-              border-radius: 8px;
-              width: calc(100% - 24px);
-              box-sizing: border-box;
-              border: 2px solid #00d2d3;
-              margin-top: 10px;
-              padding: 8px;
-            "
-            placeholder="Describe your key responsibilities and achievements"
-          ></textarea>
+          <div id="experience-container">
+            <div class="experience-entry">
+              <input type="text" class="job-title" placeholder="Job Title" />
+              <input type="text" class="company" placeholder="Company" />
+              <input type="number" class="years" placeholder="Years of Experience" />
+              <textarea
+                class="job-description"
+                rows="3"
+                style="width: 95%; border-radius: 8px; width: calc(100% - 24px); box-sizing: border-box; border: 2px solid #00d2d3; margin-top: 10px; padding: 8px;"
+                placeholder="Describe your key responsibilities and achievements"
+              ></textarea>
+              <button type="button" class="remove-experience">Remove</button>
+            </div>
+          </div>
+          <button type="button" id="add-experience">Add Experience</button>
         </fieldset>
 
         <fieldset>

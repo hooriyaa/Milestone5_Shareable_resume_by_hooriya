@@ -327,202 +327,197 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
     <script>
       document.addEventListener("DOMContentLoaded", () => {
-        const userName = new URLSearchParams(window.location.search).get(
-          "username"
-        );
-        const resumeData = JSON.parse(localStorage.getItem(userName));
-        const loading = document.querySelector(".loading");
+  const userName = new URLSearchParams(window.location.search).get("username");
+  const resumeData = JSON.parse(localStorage.getItem(userName));
+  const loading = document.querySelector(".loading");
 
-        function generateSocialLinks(data) {
-          const socialLinks = [];
-          if (data.linkedin)
-            socialLinks.push(
-              `<a href="${data.linkedin}" target="_blank"><i class="fab fa-linkedin a1"></i></a>`
-            );
-          if (data.github)
-            socialLinks.push(
-              `<a href="${data.github}" target="_blank"><i class="fab fa-github a2"></i></a>`
-            );
-          if (data.instagram)
-            socialLinks.push(
-              `<a href="${data.instagram}" target="_blank"><i class="fab fa-instagram a3"></i></a>`
-            );
-          if (data.youtube)
-            socialLinks.push(
-              `<a href="${data.youtube}" target="_blank"><i class="fab fa-youtube a4"></i></a>`
-            );
-          if (data.twitter)
-            socialLinks.push(
-              `<a href="${data.twitter}" target="_blank"><i class="fab fa-twitter a5"></i></a>`
-            );
-          if (data.whatsapp)
-            socialLinks.push(
-              `<a href="https://wa.me/${data.whatsapp.replace(
-                /\D/g,
-                ""
-              )}" target="_blank"><i class="fab fa-whatsapp a6"></i></a>`
-            );
+  function generateSocialLinks(data) {
+    const socialLinks = [];
+    if (data.linkedin)
+      socialLinks.push(
+        `<a href="${data.linkedin}" target="_blank"><i class="fab fa-linkedin a1"></i></a>`
+      );
+    if (data.github)
+      socialLinks.push(
+        `<a href="${data.github}" target="_blank"><i class="fab fa-github a2"></i></a>`
+      );
+    if (data.instagram)
+      socialLinks.push(
+        `<a href="${data.instagram}" target="_blank"><i class="fab fa-instagram a3"></i></a>`
+      );
+    if (data.youtube)
+      socialLinks.push(
+        `<a href="${data.youtube}" target="_blank"><i class="fab fa-youtube a4"></i></a>`
+      );
+    if (data.twitter)
+      socialLinks.push(
+        `<a href="${data.twitter}" target="_blank"><i class="fab fa-twitter a5"></i></a>`
+      );
+    if (data.whatsapp)
+      socialLinks.push(
+        `<a href="https://wa.me/${data.whatsapp.replace(
+          /\D/g,
+          ""
+        )}" target="_blank"><i class="fab fa-whatsapp a6"></i></a>`
+      );
 
-          return socialLinks.length
-            ? `<div class="social-links">${socialLinks.join("")}</div>`
-            : "";
-        }
+    return socialLinks.length
+      ? `<div class="social-links">${socialLinks.join("")}</div>`
+      : "";
+  }
 
-        if (resumeData) {
-          document.getElementById("resume-content").innerHTML = `
-                    <div class="resume-header">
-                        <h2>${resumeData.name}</h2>
-                        <div class="contact-info">
-                            ${
-                              resumeData.email
-                                ? `<p><i class="fas fa-envelope"></i> ${resumeData.email}</p>`
-                                : ""
-                            }
-                            ${
-                              resumeData.phone
-                                ? `<p><i class="fas fa-phone"></i> ${resumeData.phone}</p>`
-                                : ""
-                            }
-                            ${
-                              resumeData.address
-                                ? `<p><i class="fas fa-map-marker-alt"></i> ${resumeData.address}</p>`
-                                : ""
-                            }
-                        </div>
-                        ${generateSocialLinks(resumeData)}
-                    </div>
-
-                    ${
-                      resumeData.degree ||
-                      resumeData.school ||
-                      resumeData.gradYear
-                        ? `
-                        <div class="section">
-                            <h3 class="section-title"><i class="fas fa-graduation-cap"></i> Education</h3>
-                            <div class="section-content">
-                                <p><strong>${resumeData.degree}</strong> ${
-                            resumeData.school ? `from ${resumeData.school}` : ""
-                          } ${
-                            resumeData.gradYear
-                              ? `(Class of ${resumeData.gradYear})`
-                              : ""
-                          }</p>
-                            </div>
-                        </div>
-                    `
-                        : ""
-                    }
-
-                    ${
-                      resumeData.certificates && resumeData.certificates.length
-                        ? `
-                        <div class="section">
-                            <h3 class="section-title"><i class="fas fa-certificate"></i> Certifications</h3>
-                            <div class="section-content">
-                                <ul class="certificates-list">
-                                    ${resumeData.certificates
-                                      .map(
-                                        (cert) => `
-                                        <li>
-                                            <strong>${cert.name}</strong> - ${
-                                          cert.issuer
-                                        }
-                                            ${
-                                              cert.date
-                                                ? `<span class="cert-date">(${new Date(
-                                                    cert.date
-                                                  ).toLocaleDateString()})</span>`
-                                                : ""
-                                            }
-                                        </li>
-                                    `
-                                      )
-                                      .join("")}
-                                </ul>
-                            </div>
-                        </div>
-                    `
-                        : ""
-                    }
-
-                    ${
-                      resumeData.jobTitle ||
-                      resumeData.company ||
-                      resumeData.years
-                        ? `
-                        <div class="section">
-                            <h3 class="section-title"><i class="fas fa-briefcase"></i> Work Experience</h3>
-                            <div class="section-content">
-                                <p><strong>${resumeData.jobTitle}</strong> ${
-                            resumeData.company ? `at ${resumeData.company}` : ""
-                          } ${
-                            resumeData.years
-                              ? `(${resumeData.years} years)`
-                              : ""
-                          }</p>
-                                ${
-                                  resumeData.jobDescription
-                                    ? `<p class="job-description">${resumeData.jobDescription}</p>`
-                                    : ""
-                                }
-                            </div>
-                        </div>
-                    `
-                        : ""
-                    }
-
-                    ${
-                      resumeData.skills && resumeData.skills.length
-                        ? `
-                        <div class="section">
-                            <h3 class="section-title"><i class="fas fa-tools"></i> Skills</h3>
-                            <div class="section-content">
-                                <ul class="skills-list">
-                                    ${resumeData.skills
-                                      .map(
-                                        (skill) =>
-                                          `<li class="skill-item">${skill}</li>`
-                                      )
-                                      .join("")}
-                                </ul>
-                            </div>
-                        </div>
-                    `
-                        : ""
-                    }
-                `;
-        } else {
-          document.getElementById("resume-content").innerHTML = `
-                    <div class="section">
-                        <p>Resume not found. Please create a new resume.</p>
-                    </div>
-                `;
-        }
-
-        document.getElementById("download-btn").onclick = async () => {
-          loading.style.display = "flex";
-          const element = document.getElementById("resume-content");
-
-          const opt = {
-            margin: [0.5, 0.5],
-            filename: `${
-              resumeData ? resumeData.name.replace(/\s+/g, "_") : "Professional"
-            }_Resume.pdf`,
-            image: { type: "jpeg", quality: 0.98 },
-            html2canvas: { scale: 2, useCORS: true },
-            jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
-          };
-
-          try {
-            await html2pdf().from(element).set(opt).save();
-          } catch (error) {
-            console.error("Error generating PDF:", error);
-            alert("There was an error generating your PDF. Please try again.");
-          } finally {
-            loading.style.display = "none";
+  if (resumeData) {
+    document.getElementById("resume-content").innerHTML = `
+      <div class="resume-header">
+        <h2>${resumeData.name}</h2>
+        <div class="contact-info">
+          ${
+            resumeData.email
+              ? `<p><i class="fas fa-envelope"></i> ${resumeData.email}</p>`
+              : ""
           }
-        };
-      });
+          ${
+            resumeData.phone
+              ? `<p><i class="fas fa-phone"></i> ${resumeData.phone}</p>`
+              : ""
+          }
+          ${
+            resumeData.address
+              ? `<p><i class="fas fa-map-marker-alt"></i> ${resumeData.address}</p>`
+              : ""
+          }
+        </div>
+        ${generateSocialLinks(resumeData)}
+      </div>
+
+      ${
+        resumeData.education && resumeData.education.length
+          ? `
+          <div class="section">
+            <h3 class="section-title"><i class="fas fa-graduation-cap"></i> Education</h3>
+            <div class="section-content">
+              ${resumeData.education
+                .map(
+                  (edu) => `
+                <p><strong>${edu.degree}</strong> ${
+                    edu.school ? `from ${edu.school}` : ""
+                  } ${edu.gradYear ? `(Class of ${edu.gradYear})` : ""}</p>
+              `
+                )
+                .join("")}
+            </div>
+          </div>
+        `
+          : ""
+      }
+
+      ${
+        resumeData.certificates && resumeData.certificates.length
+          ? `
+          <div class="section">
+            <h3 class="section-title"><i class="fas fa-certificate"></i> Certifications</h3>
+            <div class="section-content">
+              <ul class="certificates-list">
+                ${resumeData.certificates
+                  .map(
+                    (cert) => `
+                    <li>
+                      <strong>${cert.name}</strong> - ${cert.issuer}
+                      ${
+                        cert.date
+                          ? `<span class="cert-date">(${new Date(
+                              cert.date
+                            ).toLocaleDateString()})</span>`
+                          : ""
+                      }
+                    </li>
+                  `
+                  )
+                  .join("")}
+              </ul>
+            </div>
+          </div>
+        `
+          : ""
+      }
+
+      ${
+        resumeData.experience && resumeData.experience.length
+          ? `
+          <div class="section">
+            <h3 class="section-title"><i class="fas fa-briefcase"></i> Work Experience</h3>
+            <div class="section-content">
+              ${resumeData.experience
+                .map(
+                  (exp) => `
+                <div class="experience-item">
+                  <p><strong>${exp.jobTitle}</strong> ${
+                    exp.company ? `at ${exp.company}` : ""
+                  } ${exp.years ? `(${exp.years} years)` : ""}</p>
+                  ${
+                    exp.jobDescription
+                      ? `<p class="job-description">${exp.jobDescription}</p>`
+                      : ""
+                  }
+                </div>
+              `
+                )
+                .join("")}
+            </div>
+          </div>
+        `
+          : ""
+      }
+
+      ${
+        resumeData.skills && resumeData.skills.length
+          ? `
+          <div class="section">
+            <h3 class="section-title"><i class="fas fa-tools"></i> Skills</h3>
+            <div class="section-content">
+              <ul class="skills-list">
+                ${resumeData.skills
+                  .map((skill) => `<li class="skill-item">${skill}</li>`)
+                  .join("")}
+              </ul>
+            </div>
+          </div>
+        `
+          : ""
+      }
+    `;
+  } else {
+    document.getElementById("resume-content").innerHTML = `
+      <div class="section">
+        <p>Resume not found. Please create a new resume.</p>
+      </div>
+    `;
+  }
+
+  document.getElementById("download-btn").onclick = async () => {
+    loading.style.display = "flex";
+    const element = document.getElementById("resume-content");
+
+    const opt = {
+      margin: [0.5, 0.5],
+      filename: `${
+        resumeData ? resumeData.name.replace(/\s+/g, "_") : "Professional"
+      }_Resume.pdf`,
+      image: { type: "jpeg", quality: 0.98 },
+      html2canvas: { scale: 2, useCORS: true },
+      jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
+    };
+
+    try {
+      await html2pdf().from(element).set(opt).save();
+    } catch (error) {
+      console.error("Error generating PDF:", error);
+      alert("There was an error generating your PDF. Please try again.");
+    } finally {
+      loading.style.display = "none";
+    }
+  };
+});
     </script>
   </body>
 </html>
